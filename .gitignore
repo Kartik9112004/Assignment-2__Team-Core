@@ -1,0 +1,44 @@
+# =========================
+# Project Specific
+# =========================
+# Ignore the local Bitcoin regtest node data, wallets, and credentials
+bitcoin-data/
+
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# =========================
+# Virtual Environments
+# =========================
+.venv/
+venv/
+env/
+ENV/
+
+# =========================
+# IDEs & Editors
+# =========================
+# PyCharm / IntelliJ
+.idea/
+*.iml
+
+# VS Code (just in case)
+.vscode/
+
+# =========================
+# macOS Specific
+# =========================
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# =========================
+# Environment Variables
+# =========================
+.env
