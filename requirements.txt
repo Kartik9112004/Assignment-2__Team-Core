@@ -1,6 +1,4 @@
-# HTTP library used for the core_utils JSON-RPC connection
 requests>=2.31.0
 
-# Lab Assignment Recommended Libraries (Optional but good for completeness)
 python-bitcoinlib>=0.12.2
 python-bitcoinrpc>=1.0
