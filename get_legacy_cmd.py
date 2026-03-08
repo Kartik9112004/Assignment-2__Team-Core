@@ -1,10 +1,18 @@
 from core_util import get_rpc_connection
+import json
+import sys
 
 def main():
     rpc = get_rpc_connection(wallet_name="lab_wallet")
 
-    txid_funding = "f38faf40dff384fc673552481e702c3e364827402fcae693faabeaa637626c42"
-    txid_spending = "da4f88a2e94570c84ec7946614f16d6f4ec1101ed55aed219e3878a6e95049a7"
+    try:
+        with open("tx_data.json", "r") as f:
+            data = json.load(f)
+            txid_funding = data["legacy_tx1"]
+            txid_spending = data["legacy_tx2"]
+    except (FileNotFoundError, KeyError):
+        print("Error: Could not find legacy TXIDs. Please run phase2_p2pkh.py first.")
+        sys.exit(1)
 
     txin_data = rpc("gettransaction", [txid_funding])
     tx_data = rpc("gettransaction", [txid_spending])

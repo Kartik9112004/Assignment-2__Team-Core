@@ -1,11 +1,18 @@
 from core_util import get_rpc_connection
+import json
 import sys
 
 def main():
     rpc = get_rpc_connection(wallet_name="lab_wallet")
 
-    txid_funding = "3d93a5a1398fadf082a3d8026a36edec1725b0cc7c8b338285bdae1ac402dac3"
-    txid_spending = "98b5f6408b772dde47cf7f973f953a75a5a692bf896c1ed6232de7aa6ec4861c"
+    try:
+        with open("tx_data.json", "r") as f:
+            data = json.load(f)
+            txid_funding = data["segwit_tx1"]
+            txid_spending = data["segwit_tx2"]
+    except (FileNotFoundError, KeyError):
+        print("Error: Could not find SegWit TXIDs. Please run phase3_P2SH-SegWit.py first.")
+        sys.exit(1)
 
     try:
         txin_data = rpc("gettransaction", [txid_funding])
@@ -21,7 +28,7 @@ def main():
         print("\n======================================================")
 
     except Exception as e:
-        print(f"Error fetching transactions. Did you paste the right TXIDs? Error: {e}")
+        print(f"Error fetching transactions: {e}")
 
 if __name__ == "__main__":
     main()

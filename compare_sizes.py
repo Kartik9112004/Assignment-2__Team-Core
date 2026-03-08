@@ -1,10 +1,18 @@
 from core_util import get_rpc_connection
+import json
+import sys
 
 def main():
     rpc = get_rpc_connection(wallet_name="lab_wallet")
 
-    legacy_txid = "da4f88a2e94570c84ec7946614f16d6f4ec1101ed55aed219e3878a6e95049a7"
-    segwit_txid = "98b5f6408b772dde47cf7f973f953a75a5a692bf896c1ed6232de7aa6ec4861c"
+    try:
+        with open("tx_data.json", "r") as f:
+            data = json.load(f)
+            legacy_txid = data["legacy_tx2"]
+            segwit_txid = data["segwit_tx2"]
+    except (FileNotFoundError, KeyError):
+        print("Error: Could not find TXIDs. Please run Phase 2 and Phase 3 scripts first.")
+        sys.exit(1)
 
     print("======================================================")
     print("PART 3: TRANSACTION SIZE COMPARISON")
