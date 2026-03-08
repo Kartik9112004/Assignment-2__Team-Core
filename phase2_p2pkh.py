@@ -125,7 +125,7 @@ def main():
     decoded_signed_2 = rpc("decoderawtransaction", [signed_tx_2['hex']])
     scriptSig_B = decoded_signed_2['vin'][0]['scriptSig']['asm']
     print(f"-> Extracted ScriptSig (Unlocking Script) from Address B:")
-    print(f"   [RESPONSE]: {scriptSig_B[:60]}... (truncated for readability)")
+    print(f"   [RESPONSE]: {scriptSig_B}")
     print("\n🎉 PHASE 2 COMPLETE! You have successfully chained two legacy transactions.")
 
 
