@@ -1,8 +1,5 @@
 from core_util import get_rpc_connection
 import sys
-import json
-import os
-
 
 def main():
     rpc = get_rpc_connection(wallet_name="lab_wallet")
@@ -96,18 +93,6 @@ def main():
     print(f"   [txinwitness (Witness Data)]: {txinwitness_B}")
 
     print("\nPART 2 (SEGWIT) COMPLETE! You have successfully chained two SegWit transactions.")
-
-    tx_data = {}
-    if os.path.exists("tx_data.json"):
-        with open("tx_data.json", "r") as f:
-            tx_data = json.load(f)
-
-    tx_data["segwit_tx1"] = txid_1
-    tx_data["segwit_tx2"] = txid_2
-
-    with open("tx_data.json", "w") as f:
-        json.dump(tx_data, f, indent=4)
-
 
 if __name__ == "__main__":
     main()

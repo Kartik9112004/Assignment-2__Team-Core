@@ -1,11 +1,8 @@
 import requests
 import json
 import sys
-import time
-import os
 
 CONF_FILE_PATH = "bitcoin-data/bitcoin.conf"
-
 
 def read_bitcoin_conf(filepath):
     config = {"rpcbind": "127.0.0.1", "rpcport": "18443"}
@@ -21,7 +18,6 @@ def read_bitcoin_conf(filepath):
     except FileNotFoundError:
         print(f"Error: Could not find {filepath}.")
         sys.exit(1)
-
 
 def main():
     config = read_bitcoin_conf(CONF_FILE_PATH)
@@ -110,18 +106,6 @@ def main():
     print(f"-> Extracted ScriptSig (Unlocking Script) from Address B:")
     print(f"   [RESPONSE]: {scriptSig_B}")
     print("\nPHASE 2 COMPLETE! You have successfully chained two legacy transactions.")
-
-    tx_data = {}
-    if os.path.exists("tx_data.json"):
-        with open("tx_data.json", "r") as f:
-            tx_data = json.load(f)
-
-    tx_data["legacy_tx1"] = txid_1
-    tx_data["legacy_tx2"] = txid_2
-
-    with open("tx_data.json", "w") as f:
-        json.dump(tx_data, f, indent=4)
-
 
 if __name__ == "__main__":
     main()

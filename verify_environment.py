@@ -1,7 +1,6 @@
 import requests
 import json
 import sys
-import os
 
 CONF_FILE_PATH = "bitcoin-data/bitcoin.conf"
 

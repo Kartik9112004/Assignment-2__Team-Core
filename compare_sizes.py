@@ -1,18 +1,15 @@
-from core_util import get_rpc_connection
-import json
 import sys
+from core_util import get_rpc_connection
 
 def main():
-    rpc = get_rpc_connection(wallet_name="lab_wallet")
-
-    try:
-        with open("tx_data.json", "r") as f:
-            data = json.load(f)
-            legacy_txid = data["legacy_tx2"]
-            segwit_txid = data["segwit_tx2"]
-    except (FileNotFoundError, KeyError):
-        print("Error: Could not find TXIDs. Please run Phase 2 and Phase 3 scripts first.")
+    if len(sys.argv) != 3:
+        print("Usage: python compare_sizes.py <legacy_txid> <segwit_txid>")
         sys.exit(1)
+
+    legacy_txid = sys.argv[1]
+    segwit_txid = sys.argv[2]
+
+    rpc = get_rpc_connection(wallet_name="lab_wallet")
 
     print("======================================================")
     print("PART 3: TRANSACTION SIZE COMPARISON")
