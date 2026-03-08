@@ -3,16 +3,13 @@ import json
 import os
 import sys
 
-
 def get_rpc_connection(wallet_name=None):
-    """Reads bitcoin.conf and returns a function to make RPC calls."""
-    # Smart pathing: Works whether you run it from the root or the Git folder
     if os.path.exists("bitcoin-data/bitcoin.conf"):
         conf_path = "bitcoin-data/bitcoin.conf"
     elif os.path.exists("../bitcoin-data/bitcoin.conf"):
         conf_path = "../bitcoin-data/bitcoin.conf"
     else:
-        print("❌ Error: Could not find bitcoin.conf in current or parent directory.")
+        print("Error: Could not find bitcoin.conf in current or parent directory.")
         sys.exit(1)
 
     config = {"rpcbind": "127.0.0.1", "rpcport": "18443"}
@@ -29,7 +26,7 @@ def get_rpc_connection(wallet_name=None):
     rpc_password = config.get("rpcpassword")
 
     if not rpc_user or not rpc_password:
-        print(f"❌ Error: Found {conf_path} but could not extract rpcuser/rpcpassword.")
+        print(f"Error: Found {conf_path} but could not extract rpcuser/rpcpassword.")
         sys.exit(1)
 
     rpc_host = config.get('rpcbind', '127.0.0.1')
@@ -46,15 +43,13 @@ def get_rpc_connection(wallet_name=None):
 
         response = requests.post(endpoint, json=payload, auth=auth)
 
-        # Explicitly catch the 401 error before it breaks other things
         if response.status_code == 401:
-            print(f"\n❌ 401 Unauthorized: The node rejected User '{rpc_user}'.")
+            print(f"\n401 Unauthorized: The node rejected User '{rpc_user}'.")
             print("   -> Fix: Make sure you started bitcoind from the root Assign_2_proj_Blockchain directory!")
             sys.exit(1)
 
         response.raise_for_status()
 
-        # Extract result or throw RPC error
         json_resp = response.json()
         if json_resp.get("error"):
             raise Exception(json_resp["error"])

@@ -1,30 +1,27 @@
 from core_util import get_rpc_connection
 import sys
 
-
 def main():
     rpc = get_rpc_connection(wallet_name="lab_wallet")
 
     print("======================================================")
-    print("⛓️  PART 2: P2SH-SEGWIT TRANSACTION CHAIN (A' -> B' -> C')")
+    print("PART 2: P2SH-SEGWIT TRANSACTION CHAIN (A' -> B' -> C')")
     print("======================================================\n")
 
-    # 1. Create/Load Wallet without swallowing errors
     try:
         rpc("loadwallet", ["lab_wallet"], use_base=True)
-        print("✅ Loaded existing wallet: lab_wallet")
+        print("Loaded existing wallet: lab_wallet")
     except Exception as e:
         if "already loaded" in str(e).lower() or "duplicate" in str(e).lower():
-            print("✅ Wallet lab_wallet is already loaded.")
+            print("Wallet lab_wallet is already loaded.")
         else:
             try:
                 rpc("createwallet", ["lab_wallet"], use_base=True)
-                print("✅ Created new wallet: lab_wallet")
+                print("Created new wallet: lab_wallet")
             except Exception as e2:
-                print(f"❌ Failed to create or load wallet: {e2}")
+                print(f"Failed to create or load wallet: {e2}")
                 sys.exit(1)
 
-    # 2. Generate P2SH-SegWit Addresses
     print("\n-> Generating Addresses A', B', and C'...")
     addr_A = rpc("getnewaddress", ["Address_A_Segwit", "p2sh-segwit"])
     addr_B = rpc("getnewaddress", ["Address_B_Segwit", "p2sh-segwit"])
@@ -33,7 +30,6 @@ def main():
     print(f"   Address B': {addr_B}")
     print(f"   Address C': {addr_C}\n")
 
-    # 3. Fund Address A'
     print("-> Mining 101 blocks to mature coinbase rewards...")
     dummy_addr = rpc("getnewaddress", ["Miner", "p2sh-segwit"])
     rpc("generatetoaddress", [101, dummy_addr])
@@ -43,11 +39,8 @@ def main():
     rpc("generatetoaddress", [1, dummy_addr])
     print(f"   Funding TXID: {txid_fund_A}\n")
 
-    # ==========================================
-    # TRANSACTION 1: ADDRESS A' -> ADDRESS B'
-    # ==========================================
     print("======================================================")
-    print("💸 TRANSACTION 1: A' -> B'")
+    print("TRANSACTION 1: A' -> B'")
 
     unspent_A = rpc("listunspent", [1, 9999999, [addr_A]])[0]
     print(f"-> Selected UTXO for Address A': {unspent_A['txid']} (Vout: {unspent_A['vout']})")
@@ -67,13 +60,10 @@ def main():
     signed_tx_1 = rpc("signrawtransactionwithwallet", [raw_tx_1])
     txid_1 = rpc("sendrawtransaction", [signed_tx_1['hex']])
     rpc("generatetoaddress", [1, dummy_addr])
-    print(f"✅ Transaction A' -> B' Broadcasted & Confirmed! TXID: {txid_1}\n")
+    print(f"Transaction A' -> B' Broadcasted & Confirmed! TXID: {txid_1}\n")
 
-    # ==========================================
-    # TRANSACTION 2: ADDRESS B' -> ADDRESS C'
-    # ==========================================
     print("======================================================")
-    print("💸 TRANSACTION 2: B' -> C'")
+    print("TRANSACTION 2: B' -> C'")
 
     unspent_B = rpc("listunspent", [1, 9999999, [addr_B]])[0]
     print(f"-> Selected UTXO for Address B': {unspent_B['txid']} (Vout: {unspent_B['vout']})")
@@ -92,9 +82,8 @@ def main():
     signed_tx_2 = rpc("signrawtransactionwithwallet", [raw_tx_2])
     txid_2 = rpc("sendrawtransaction", [signed_tx_2['hex']])
     rpc("generatetoaddress", [1, dummy_addr])
-    print(f"✅ Transaction B' -> C' Broadcasted & Confirmed! TXID: {txid_2}\n")
+    print(f"Transaction B' -> C' Broadcasted & Confirmed! TXID: {txid_2}\n")
 
-    # Extract SegWit Responses
     decoded_signed_2 = rpc("decoderawtransaction", [signed_tx_2['hex']])
     scriptSig_B = decoded_signed_2['vin'][0]['scriptSig']['hex']
     txinwitness_B = decoded_signed_2['vin'][0].get('txinwitness', [])
@@ -103,8 +92,7 @@ def main():
     print(f"   [scriptSig (Redeem Script Hash)]: {scriptSig_B}")
     print(f"   [txinwitness (Witness Data)]: {txinwitness_B}")
 
-    print("\n🎉 PART 2 (SEGWIT) COMPLETE! You have successfully chained two SegWit transactions.")
-
+    print("\nPART 2 (SEGWIT) COMPLETE! You have successfully chained two SegWit transactions.")
 
 if __name__ == "__main__":
     main()
