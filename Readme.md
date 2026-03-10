@@ -21,7 +21,7 @@ The primary objective of this assignment is to programmatically interact with a 
 
 ## 🗂️ Repository Structure
 
-* `launch.py`: **[MASTER SCRIPT]** An automated orchestrator that runs the entire lab workflow from start to finish. It extracts transaction IDs dynamically, passes them between scripts, and generates exact terminal commands for debugging.
+* `launch.py`: **[MASTER SCRIPT]** An automated orchestrator that runs the entire lab workflow from start to finish. It extracts transaction IDs dynamically, passes them between scripts, and generates exact terminal commands for debugging. Whatever commands it will give for phase_2 and phase_3, copy them directly into the terminal for debugging the code.
 * `phase2_p2pkh.py`: Executes Part 1. Handles the creation and signing of the Legacy (P2PKH) transaction chain.
 * `phase3_P2SH-SegWit.py`: Executes Part 2. Handles the creation and signing of the P2SH-SegWit transaction chain.
 * `compare_sizes.py`: Executes Part 3. Takes specific TXIDs and outputs a comparative analysis of their sizes.
