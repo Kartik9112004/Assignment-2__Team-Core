@@ -54,4 +54,4 @@ To achieve the assignment objectives, our scripts utilize the following Bitcoin 
 ### 2. Python Dependencies
 Install the required HTTP library for RPC calls:
 ```bash
-pip install requests
+pip install -r requirements.txt
