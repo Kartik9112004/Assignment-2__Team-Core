@@ -10,7 +10,7 @@
 This repository contains the Python scripts and documentation for the CS 216 Bitcoin Transaction Lab. The goal is to programmatically create, broadcast, and validate Bitcoin transactions using Legacy (P2PKH) and SegWit (P2SH-P2WPKH) address formats via the Bitcoin Core RPC interface.
 
 ## Project Structure
-* `launch.py`: An automated script that executes the entire lab workflow. It verifies the node, runs both transaction chains, compares their sizes, and outputs the exact `btcdeb` commands needed for debugging.
+* `launch.py`: The master automated execution script. Running this will execute the entire lab workflow automatically. **Crucially, it dynamically generates and prints the exact `btcdeb` terminal commands you need to copy and paste into your terminal** to debug the scripts and take screenshots for your report. 
 * `phase2_p2pkh.py`: Executes Part 1. Generates Legacy addresses, funds them, and chains transactions (A -> B -> C).
 * `phase3_P2SH-SegWit.py`: Executes Part 2. Generates SegWit addresses, funds them, and chains transactions (A' -> B' -> C').
 * `compare_sizes.py`: Executes Part 3. Compares the size, virtual size (vbytes), and weight of Legacy vs. SegWit transactions.
