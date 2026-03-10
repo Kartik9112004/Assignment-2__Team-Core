@@ -55,4 +55,3 @@ To achieve the assignment objectives, our scripts utilize the following Bitcoin 
 Install the required HTTP library for RPC calls:
 ```bash
 pip install requests
-
