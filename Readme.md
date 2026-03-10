@@ -6,19 +6,38 @@
 * **Rishan Gobse** - 240008023
 * **Arjun Dhamdhere** - 240005011
 
-## Project Overview
-This repository contains the Python scripts and documentation for the CS 216 Bitcoin Transaction Lab. The goal is to programmatically create, broadcast, and validate Bitcoin transactions using Legacy (P2PKH) and SegWit (P2SH-P2WPKH) address formats via the Bitcoin Core RPC interface.
+---
 
-## Project Structure
-* `launch.py`: The master automated execution script. Running this will execute the entire lab workflow automatically. **Crucially, it dynamically generates and prints the exact `btcdeb` terminal commands you need to copy and paste into your terminal** to debug the scripts and take screenshots for your report. 
-* `phase2_p2pkh.py`: Executes Part 1. Generates Legacy addresses, funds them, and chains transactions (A -> B -> C).
-* `phase3_P2SH-SegWit.py`: Executes Part 2. Generates SegWit addresses, funds them, and chains transactions (A' -> B' -> C').
-* `compare_sizes.py`: Executes Part 3. Compares the size, virtual size (vbytes), and weight of Legacy vs. SegWit transactions.
-* `core_util.py`: A helper module for establishing a secure RPC connection to the local `bitcoind` node.
+## 📖 Project Overview
+This repository contains the complete Python codebase and documentation for the CS 216 Bitcoin Transaction Lab. 
 
-## Prerequisites
-1. **Bitcoin Core (`bitcoind`)**: Running locally in `regtest` mode.
-2. **Python 3.x**
-3. **Required Packages**: 
-   ```bash
-   pip install requests
+The primary objective of this assignment is to programmatically interact with a local Bitcoin node (`bitcoind`) via RPC to create, broadcast, and analyze Bitcoin transactions. Specifically, the project demonstrates:
+1. **Legacy Transactions (P2PKH):** Generating addresses, funding them, and chaining transactions (A → B → C).
+2. **SegWit Transactions (P2SH-P2WPKH):** Generating SegWit addresses, funding them, and chaining transactions (A' → B' → C').
+3. **Script Extraction:** Programmatically extracting and decoding Locking Scripts (`scriptPubKey`), Unlocking Scripts (`scriptSig`), and Witness data.
+4. **Size Analysis:** Comparing the raw bytes, virtual bytes (vbytes), and weight units (WU) between Legacy and SegWit transactions to demonstrate the efficiency of SegWit.
+
+---
+
+## 🗂️ Repository Structure
+
+* `launch.py`: **[MASTER SCRIPT]** An automated orchestrator that runs the entire lab workflow from start to finish. It extracts transaction IDs dynamically, passes them between scripts, and generates exact terminal commands for debugging.
+* `phase2_p2pkh.py`: Executes Part 1. Handles the creation and signing of the Legacy (P2PKH) transaction chain.
+* `phase3_P2SH-SegWit.py`: Executes Part 2. Handles the creation and signing of the P2SH-SegWit transaction chain.
+* `compare_sizes.py`: Executes Part 3. Takes specific TXIDs and outputs a comparative analysis of their sizes.
+* `core_util.py`: A robust utility module that establishes a secure RPC connection to the local `bitcoind` node, handling authentication and error reporting.
+* `verify_environment.py`: A lightweight script used to ensure the Bitcoin node is responsive before running the heavy transactions.
+
+---
+
+## ⚙️ Prerequisites & Environment Setup
+
+### 1. Software Requirements
+* **Bitcoin Core (`bitcoind`)**: Must be installed and running locally in `regtest` mode.
+* **Python 3.x**: Ensure Python is installed and added to your system PATH.
+* **btcdeb**: The Bitcoin Script Debugger must be installed on your system for final validation.
+
+### 2. Python Dependencies
+Install the required HTTP library for RPC calls:
+```bash
+pip install requests
