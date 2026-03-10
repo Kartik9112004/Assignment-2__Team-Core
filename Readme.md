@@ -19,7 +19,7 @@ The primary objective of this assignment is to programmatically interact with a 
 
 ---
 
-## 🗂️ Repository Structure
+##  Repository Structure
 
 * `launch.py`: **[MASTER SCRIPT]** An automated orchestrator that runs the entire lab workflow from start to finish. It extracts transaction IDs dynamically, passes them between scripts, and generates exact terminal commands for debugging. Whatever commands it will give for phase_2 and phase_3, copy them directly into the terminal for debugging the code.
 * `phase2_p2pkh.py`: Executes Part 1. Handles the creation and signing of the Legacy (P2PKH) transaction chain.
@@ -30,7 +30,7 @@ The primary objective of this assignment is to programmatically interact with a 
 
 ---
 
-## 🛠️ Core RPC Methods Used
+##  Core RPC Methods Used
 To achieve the assignment objectives, our scripts utilize the following Bitcoin Core RPC methods:
 * `getnewaddress`: To generate Legacy (`legacy`) and SegWit (`p2sh-segwit`) addresses.
 * `generatetoaddress`: To mine blocks and mature coinbase rewards.
@@ -44,7 +44,7 @@ To achieve the assignment objectives, our scripts utilize the following Bitcoin 
 
 ---
 
-## ⚙️ Prerequisites & Environment Setup
+##  Prerequisites & Environment Setup
 
 ### 1. Software Requirements
 * **Bitcoin Core (`bitcoind`)**: Must be installed and running locally in `regtest` mode.
