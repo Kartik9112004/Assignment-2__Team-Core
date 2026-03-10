@@ -1,9 +1,10 @@
 # CS 216: Bitcoin Transaction Lab Assignment
 
 ## Team Members
-* **Kartik Budhani** - [Insert Roll Number]
-* **[Team Member 2 Name]** - [Insert Roll Number]
-* **[Team Member 3 Name]** - [Insert Roll Number]
+* **Kartik Budhani** - 240005022
+* **Krishnam Digga** - 240003043
+* **Rishan Gobse** - 240008023
+* **Arjun Dhamdhere** - 240005011
 
 ## Project Overview
 This repository contains the Python scripts and documentation for the CS 216 Bitcoin Transaction Lab. The goal is to programmatically create, broadcast, and validate Bitcoin transactions using Legacy (P2PKH) and SegWit (P2SH-P2WPKH) address formats via the Bitcoin Core RPC interface.
