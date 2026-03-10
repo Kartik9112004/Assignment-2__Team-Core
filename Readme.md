@@ -30,6 +30,20 @@ The primary objective of this assignment is to programmatically interact with a 
 
 ---
 
+## 🛠️ Core RPC Methods Used
+To achieve the assignment objectives, our scripts utilize the following Bitcoin Core RPC methods:
+* `getnewaddress`: To generate Legacy (`legacy`) and SegWit (`p2sh-segwit`) addresses.
+* `generatetoaddress`: To mine blocks and mature coinbase rewards.
+* `sendtoaddress`: To initially fund Address A and Address A'.
+* `listunspent`: To dynamically fetch the correct UTXO needed for the next transaction in the chain.
+* `createrawtransaction`: To build the raw transaction hex mapping inputs (UTXOs) to outputs.
+* `decoderawtransaction`: To extract and analyze the `scriptPubKey` (Challenge) and `scriptSig` (Response) from the raw and signed hex.
+* `signrawtransactionwithwallet`: To securely sign the transaction using the node's wallet keys.
+* `sendrawtransaction`: To broadcast the signed transaction to the regtest network.
+* `gettransaction`: To fetch the finalized transaction details for size and weight comparisons.
+
+---
+
 ## ⚙️ Prerequisites & Environment Setup
 
 ### 1. Software Requirements
